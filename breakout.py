@@ -7,7 +7,7 @@ t.hideturtle()
 t.bgcolor("black")
 t.pencolor("white")
 t.title("breakout")
-t.write("BREAKOUT \n press space to start")
+
 gameon=0
 bx=0
 by=100
@@ -174,9 +174,6 @@ def sl():
 def ls():
     global mv
     mv=0
-def start():
-    global gameon
-    gameon=1
 def click(x,y):
     global gameon
     if gameon==0:
@@ -187,6 +184,16 @@ def click(x,y):
             px+=40
         elif x < 0 and px >= -200:
             px-=40
+def menu():
+    global gameon
+    t.goto(0, 0)
+    t.write("BREAKOUT \n press space to start")
+def start():
+    global gameon
+    if gameon ==0:
+        gameon=1
+    else:
+        gameon=0
 t.onkeypress(sr, "d") 
 t.onkeyrelease(rs, "d")
 t.onkeypress(sl, "a") 
@@ -209,6 +216,9 @@ def mainloop():
         t.update()
         t.ontimer(mainloop,50)
     else:
+        t.clear()
+        menu()
+        t.update()
         t.ontimer(mainloop,50)
 mainloop()
 t.mainloop()
