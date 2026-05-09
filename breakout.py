@@ -137,6 +137,15 @@ def paddle():
     t.goto(px,py+10)
     t.goto(px,py)
     t.penup()
+    
+    t.goto(200,200)
+    t.pendown()
+    t.goto(200,200)
+    t.goto(200,-200)
+    t.goto(-200,-200)
+    t.goto(-200,200)
+    t.goto(200,200)
+    t.penup()
 
 mv= 0
 
@@ -168,11 +177,26 @@ def ls():
 def start():
     global gameon
     gameon=1
+def click(x,y):
+    global gameon
+    if gameon==0:
+        gameon=1
+    else:
+        global px
+        if 0 < x and px <= 200:
+            px+=40
+        elif x < 0 and px >= -200:
+            px-=40
 t.onkeypress(sr, "d") 
 t.onkeyrelease(rs, "d")
 t.onkeypress(sl, "a") 
 t.onkeyrelease(ls, "a")
+t.onkeypress(sr, "Right") 
+t.onkeyrelease(rs, "Right")
+t.onkeypress(sl, "Left") 
+t.onkeyrelease(ls, "Left")
 t.onkey(start, "space")
+t.onscreenclick(click)
 t.listen()
 def mainloop():
     if gameon==1:
